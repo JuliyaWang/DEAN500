@@ -11,26 +11,103 @@ Markdown is a lightweight and easy-to-use syntax for styling your writing. It in
 ```markdown
 Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+# SQL Note 
 
-- Bulleted
-- List
+DROP TABLE Students;
+DROP TABLE Enrolled;
 
-1. Numbered
-2. List
+CREATE TABLE Students
+        (sid CHAR(5),
+         name VARCHAR(20),
+         login VARCHAR(20),
+         age INTEGER check (age>0),
+         gpa REAL check (gpa>=0.0 AND gpa <= 4.0),
+         PRIMARY KEY (sid));
 
-**Bold** and _Italic_ and `Code` text
+CREATE TABLE Enrolled
+        (sid CHAR(5),
+        cid VARCHAR(20),
+        grade CHAR(1),
+        Foreign key (sid) REFERENCES Students(sid));
 
-[Link](url) and ![Image](src)
-```
+INSERT INTO Students (sid, name, login, age, gpa)
+        VALUES(53666,"Jones","jones@cs",18,3.4);
+INSERT INTO Students (sid, name, login, age, gpa)
+        VALUES(53688,"Smith","smith@eecs",18,3.2);
+INSERT INTO Students (sid, name, login, age, gpa)
+        VALUES(53650,"Smith","amith@math",19,3.9);
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+INSERT INTO Enrolled (sid, cid,grade)
+        VALUES(53831,"Carnatic101","C");
+INSERT INTO Enrolled (sid, cid,grade)
+        VALUES(53831,"Reggae203","B");
+INSERT INTO Enrolled (sid, cid,grade)
+        VALUES(53650,"Topology112","A");
+INSERT INTO Enrolled (sid, cid,grade)
+        VALUES(53666,"History105","B");
 
-### Jekyll Themes
+INSERT INTO Enrolled (sid, cid, grade) VALUES (NULL,"Carnatic101","C");
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/JuliyaWang/Hellow-/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## becausethe Enrolled table has the sid that Students table doesn’t have. Fk is reference to the pk. We need to fix the code with the adding Null on the deleting value. 
+
+## Result
+MySQL [ywang74]> show tables;
++-------------------+
+| Tables_in_ywang74 |
++-------------------+
+| Enrolled          |
+| Students          |
++-------------------+
+2 rows in set (0.00 sec)
+
+MySQL [ywang74]> select* from Students;
++-------+-------+------------+------+------+
+| sid   | name  | login      | age  | gpa  |
++-------+-------+------------+------+------+
+| 53650 | Smith | amith@math |   19 |  3.9 |
+| 53666 | Jones | jones@cs   |   18 |  3.4 |
+| 53688 | Smith | smith@eecs |   18 |  3.2 |
++-------+-------+------------+------+------+
+3 rows in set (0.01 sec)
+
+MySQL [ywang74]> select * from Enrolled;
++-------+-------------+-------+
+| sid   | cid         | grade |
++-------+-------------+-------+
+| 53650 | Topology112 | A     |
+| 53666 | History105  | B     |
+| NULL  | Carnatic101 | C     |
++-------+-------------+-------+
+3 rows in set (0.01 sec)
+
+MySQL [ywang74]> delete from Students where sid="53650";
+Query OK, 1 row affected (0.05 sec)
+
+MySQL [ywang74]> select * from Enrolled;
++-------+-------------+-------+
+| sid   | cid         | grade |
++-------+-------------+-------+
+| NULL  | Topology112 | A     |
+| 53666 | History105  | B     |
+| NULL  | Carnatic101 | C     |
++-------+-------------+-------+
+3 rows in set (0.00 sec)
+
+MySQL [ywang74]> UPDATE Students SET sid = 12345 where name ="Jones";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MySQL [ywang74]> select *from Students;
++-------+-------+------------+------+------+
+| sid   | name  | login      | age  | gpa  |
++-------+-------+------------+------+------+
+| 12345 | Jones | jones@cs   |   18 |  3.4 |
+| 53688 | Smith | smith@eecs |   18 |  3.2 |
++-------+-------+------------+------+------+
+2 rows in set (0.00 sec)
+
+
+
 
 ### Support or Contact
 
