@@ -1,3 +1,40 @@
+## Python Code Exercise
+%matplotlib inline
+import altair as alt
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns;
+import pandas as pd
+import os
+sns.set(color_codes=True)
+
+read data 
+cocde: weather = pd.read_csv('weather_data/weather.csv')
+       weather.head()
+
+	Numbers	Name	Date and Time	Temperature	Wind Speed	Wind Gust	Visibility	Cloud Cover	Relative Humidity	Conditions
+0	0	Woodbridge, VA, United States	09/18/2020 21:00:00	65.0	11.4	18.3	15.0	22.0	58.0	Clear
+1	1	Woodbridge, VA, United States	09/18/2020 22:00:00	63.1	12.8	18.3	15.0	18.0	56.0	Clear
+2	2	Woodbridge, VA, United States	09/18/2020 23:00:00	61.1	13.9	19.5	15.0	13.0	56.0	Clear
+3	3	Woodbridge, VA, United States	09/19/2020 00:00:00	58.9	13.9	19.5	15.0	11.0	53.0	Clear
+4	4	Woodbridge, VA, United States	09/19/2020 01:00:00	58.0	12.8	17.2	15.0	9.0	52.0	
+
+look at data type 
+code: weather.dtypes
+
+Numbers                int64
+Name                  object
+Date and Time         object
+Temperature          float64
+Wind Speed           float64
+Wind Gust            float64
+Visibility           float64
+Cloud Cover          float64
+Relative Humidity    float64
+Conditions            object
+dtype: object
+
+
 
 ## Visualization Critique - Project 
 First
