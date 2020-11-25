@@ -1,3 +1,3 @@
-# Hellow-DEAN 500
+# Hello-DEAN 500
 My first Github page 
 
